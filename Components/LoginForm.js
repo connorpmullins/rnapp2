@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
+import { Text } from 'react-native';
 import { Button, Card , CardSection, Input } from './common';
+import firebase from 'firebase';
+
 
 class LoginForm extends Component {
-	state = { email: '', password: ''};
+	state = { email: '', password: '', error: ''};
+
+	onButtonPress() {
+		const { email, password } = this.state;
+
+		this.setState({ error: ''});
+
+			/*So firebase is how we log someone in.  .catch allows us to handle a failed login*/
+			/*.catch is like 'else-if'*/
+		console.log(email, password);
+/*		firebase.auth().signInWithEmailAndPassword(email, password)
+			.catch(() => {*/
+				firebase.auth().createUserWithEmailAndPassword(email, password)
+					.catch(() => {
+						this.setState({error: 'Authentication Failed. Boooo'});
+/*					});*/
+			});
+	}
 
 	render () {
 		return (
@@ -18,15 +38,20 @@ class LoginForm extends Component {
 
 				<CardSection> 
 					<Input
-						label="Password"
+						label="Password:"
 						placeholder="password"
+						secureTextEntry={true}
 						value={this.state.password}
 						onChangeText={password => this.setState({ password })}
 					/>
 				</CardSection>
 
+				<Text style={styles.errorTextStyle}>
+					{this.state.error}
+				</Text>
+
 				<CardSection>
-					<Button>
+					<Button onPress={this.onButtonPress.bind(this)}>
 						Log in
 					</Button>
 				</CardSection>
@@ -35,5 +60,14 @@ class LoginForm extends Component {
 		);
 	}
 }
+
+const styles ={
+	errorTextStyle: {
+		fontSize: 16,
+		alignSelf: 'center',
+		color: 'red',
+		paddingTop: 5
+	}
+};
 
 export default LoginForm;
