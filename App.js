@@ -1,21 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import { View } from 'react-native';
+import firebase from 'firebase';
+import { Header } from './Components/common';
+import LoginForm from './Components/LoginForm';
+
+/*Firebase allows for user authentication. I have only set up email auth.*/
 
 export default class App extends React.Component {
+  componentWillMount (){
+    firebase.initializeApp({
+    apiKey: 'AIzaSyB5iE58xyWkLG_mQ_OmyRotUSSL3h9snIc',
+    authDomain: 'rnapp2-78419.firebaseapp.com',
+    databaseURL: 'https://rnapp2-78419.firebaseio.com',
+    projectId: 'rnapp2-78419',
+    storageBucket: 'rnapp2-78419.appspot.com',
+    messagingSenderId: "168033884666"
+  })
+
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+      <View>
+        <Header headerText="Authentication"/>
+        <LoginForm />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
