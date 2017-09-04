@@ -4,17 +4,20 @@ import firebase from 'firebase';
 import { Header } from './Components/common';
 import LoginForm from './Components/LoginForm';
 
+
+
 /*Firebase allows for user authentication. I have only set up email auth.*/
 
 export default class App extends React.Component {
   componentWillMount (){
     const config = {
-    apiKey: 'AIzaSyB5iE58xyWkLG_mQ_OmyRotUSSL3h9snIc',
-    authDomain: 'rnapp2-78419.firebaseapp.com',
-    databaseURL: 'https://rnapp2-78419.firebaseio.com',
-    projectId: 'rnapp2-78419',
-    storageBucket: 'rnapp2-78419.appspot.com',
-    messagingSenderId: "168033884666"
+    apiKey: "AIzaSyD6Ng0HDAlAB9v28zWHnzMgAgNxRieo6Gk",
+    authDomain: "rnapp2-178717.firebaseapp.com",
+    databaseURL: "https://rnapp2-178717.firebaseio.com",
+    projectId: "rnapp2-178717",
+    storageBucket: "rnapp2-178717.appspot.com",
+    messagingSenderId: "769892447276",
+    serviceAccount: "./rnapp2-3bb262d2ed32.json"
   };
   firebase.initializeApp(config);
 

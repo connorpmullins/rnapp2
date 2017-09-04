@@ -9,19 +9,31 @@ class LoginForm extends Component {
 
 	onButtonPress() {
 		const { email, password } = this.state;
-
+		//this.setState 'error' pops an error
 		this.setState({ error: ''});
 
+		firebase.auth().signInWithEmailAndPassword(email,password)
+			.catch (() => {
+				firebase.auth().createUserWithEmailAndPassword(email,password)
+					.catch (() => {
+						this.setState({ error: 'Authentication Failed. Boooo'});
+					});
+			});
 			/*So firebase is how we log someone in.  .catch allows us to handle a failed login*/
 			/*.catch is like 'else-if'*/
-		console.log(email, password);
-/*		firebase.auth().signInWithEmailAndPassword(email, password)
-			.catch(() => {*/
-				firebase.auth().createUserWithEmailAndPassword(email, password)
-					.catch(() => {
-						this.setState({error: 'Authentication Failed. Boooo'});
-/*					});*/
+
+
+
+
+
+/*		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+			  // Handle Errors here.
+			  var errorCode = error.code;
+			  var errorMessage = error.message;
+			  // ...
 			});
+*/
+
 	}
 
 	render () {

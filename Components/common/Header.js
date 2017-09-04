@@ -2,7 +2,6 @@ import React from 'react'
 import ReactNative from 'ReactNative';
 import { Text, View } from 'react-native';
 
-
 //View makes it easier to style components
 const Header = (props) => {
 	const { textStyle, viewStyle } = styles;
